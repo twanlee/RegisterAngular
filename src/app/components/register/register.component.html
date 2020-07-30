@@ -1,0 +1,84 @@
+<h2 class="text-center">User registration</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="col-md-6 offset-md-3">
+  <div class="form-group row">
+    <label class="col">
+      Email
+      <input type="email" class="form-control" formControlName="email">
+    </label>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+    Invalid email!
+  </div>
+  <fieldset formGroupName="pwGroup">
+    <div class="form-group row">
+      <label class="col">
+        Password
+        <input type="password" class="form-control" formControlName="password">
+      </label>
+    </div>
+    <div class="form-group row">
+      <label class="col">
+        Confirm Password
+        <input type="password" class="form-control" formControlName="confirmPassword">
+      </label>
+    </div>
+  </fieldset>
+  <div class="alert alert-danger" role="alert"
+       *ngIf="registerForm.hasError('passwordnotmatch', ['pwGroup']) &&
+      registerForm.get('pwGroup').touched">
+    Password does not match!
+  </div>
+
+
+  <div class="form-group row">
+    <label class="col">
+      Country
+      <select type="email" class="form-control" formControlName="country">
+        <option value="Việt Nam">Việt Nam</option>
+        <option value="Việt Nam">Mỹ</option>
+      </select>
+    </label>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('country').invalid && registerForm.get('country').touched">
+    Select your country!
+  </div>
+  <div class="form-group row">
+    <label class="col">
+      Tuổi
+      <input type="number" formControlName="age">
+    </label>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('age').invalid && registerForm.get('age').touched">
+    Trên 16 tuổi
+  </div>
+
+  <div class="custom-control custom-radio">
+    <input type="radio" id="male" formControlName="gender" value="male">
+    <label for="male">Male</label><br>
+    <input type="radio" id="female" formControlName="gender" value="female">
+    <label for="female">Female</label><br>
+    <input type="radio" id="other" formControlName="gender" value="other">
+    <label for="other">Other</label>
+  </div>
+<!--  <div class="custom-control custom-radio">-->
+<!--    <input type="radio" id="customRadio2" formControlName="gender" value="Male" class="custom-control-input">-->
+<!--    <label class="custom-control-label" for="customRadio2">Female</label>-->
+<!--  </div>-->
+  <div class="form-group row">
+    <label class="col">
+      Phone
+      <input type="email" class="form-control" formControlName="phone" pattern="/^\+84\d{9,10}$/">
+    </label>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="registerForm.get('phone').invalid && registerForm.get('phone').touched">
+    Invalid!
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-info" type="submit">Submit</button>
+  </div>
+</form>
+
+<pre>
+{{ registerForm.value | json}}
+</pre>
